@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <script src="../marky.js" type="text/javascript" charset="utf-8"></script>
+    <style type="text/css" media="screen">
+      * {font-family: Arial}
+      label {display: block}
+    </style>
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+
+      var HTML = new Marky(document.body)
+
+      with (HTML) {
+
+        h1("HTML")
+
+        h2("Table")
+
+        table(function() {
+          thead(function() {
+            th("Name")
+            th("Age")
+          })
+
+          tbody(function() {
+
+            var counter = 0
+
+            function bgColor () {
+              counter ++
+              return (counter%2 == 0) ? '#eee' : '#aaa'
+            }
+
+            [['John', 37], ['Paul', 39], ['Goerge', 45], ['Ringo', 34]].forEach(function(pair) {
+
+              tr({style: "background: " + bgColor() }, function() {
+                td(pair[0])
+                td(pair[1])
+              })
+
+            })
+
+          })
+        })
+
+        h2("Form")
+
+        form({action: '/index.html', method: 'get'}, function() {
+          label("Name:", function() {
+            input({placeholder: 'type'})
+          })
+
+          label("Age:", function() {
+            select(function() {
+
+              [37, 39, 45, 34].forEach(function(age) {
+                var attrs = {value: age}
+                if (age == 45) {
+                  attrs.selected = 'selected'
+                }
+                option(age, attrs)
+              })
+
+            })
+          })
+
+          p(function() {
+            button("Submit", {type: 'submit'})
+            a("Cancel", {href: 'http://www.google.com'})
+          })
+        })
+      }
+    </script>
+  </body>
+</html>
