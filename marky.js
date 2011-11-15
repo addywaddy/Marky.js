@@ -1,5 +1,20 @@
 (function() {
 
+  var MarkyElement = function(node) {
+    var node = node
+    return {
+      set: function(attrs) {
+        Object.keys(attrs).forEach(function(attr) {
+          node.setAttribute(attr, attrs[attr])
+        })
+        return node
+      },
+      get: function(attr) {
+        return node.getAttribute(attr)
+      }
+    }
+  }
+
   var Marky = function(node, type) {
 
     var type    = type || 'html',
@@ -60,6 +75,7 @@
                 value = value()
               }
               tag.setAttribute(attr, value)
+              return this
             })
           }
 
@@ -71,6 +87,7 @@
           } else {
             parent.appendChild(tag)
           }
+          return new MarkyElement(tag)
         }
       }
 
