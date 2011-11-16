@@ -17,6 +17,8 @@
 
   var Marky = function(node, type) {
 
+    if (typeof(node) === 'undefined') node = document.createElement('div')
+
     var type    = type || 'html',
         parent  = node,
         methods = {}
@@ -65,7 +67,7 @@
           parent.appendChild(tag)
 
           if (txt) {
-            tag.appendChild(document.createTextNode(txt))
+            tag.innerHTML = txt
           }
 
           if (attrs) {
@@ -115,6 +117,16 @@
       tags[type].split(" ").forEach(function(tag) {
         methods[tag] = builder(tag)
       })
+
+      methods.appendTo = function(container) {
+        //var children = parent.childNodes
+        //for (var i = 0; i <= children.length; ++i) {
+          Array.prototype.slice.call(parent.childNodes).forEach(function(el) {
+            container.appendChild(el)
+          })
+          //container.appendChild(Array.prototype.slice.call(parent.childNodes))
+        //}
+      }
 
       return methods
     }
