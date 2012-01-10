@@ -67,7 +67,11 @@
           parent.appendChild(tag)
 
           if (txt) {
-            tag.innerHTML = txt
+            if (type=='svg') {
+              tag.textContent = txt
+            } else {
+              tag.innerHTML = txt
+            }
           }
 
           if (attrs) {
