@@ -123,15 +123,15 @@
       })
 
       methods.appendTo = function(container) {
-        //var children = parent.childNodes
-        //for (var i = 0; i <= children.length; ++i) {
-          Array.prototype.slice.call(parent.childNodes).forEach(function(el) {
-            container.appendChild(el)
-          })
-          //container.appendChild(Array.prototype.slice.call(parent.childNodes))
-        //}
+        Array.prototype.slice.call(parent.childNodes).forEach(function(el) {
+          container.appendChild(el)
+        })
       }
 
+      methods.clear = function() {
+        node.innerHTML = ''
+        return methods
+      }
       return methods
     }
 
