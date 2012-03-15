@@ -102,6 +102,9 @@
               var tag = document.createElement(tagName)
           }
 
+          if (typeof(parent) === 'function') {
+            parent = parent()
+          }
           parent.appendChild(tag)
 
           if (txt) {
