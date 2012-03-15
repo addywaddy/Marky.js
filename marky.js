@@ -1,10 +1,48 @@
 (function() {
 
+  /*
+   *  `_each` and `_keys` pilfered from the wonderful Underscore.js
+   *
+   *  Underscore.js 1.3.1
+   *  (c) 2009-2012 Jeremy Ashkenas, DocumentCloud Inc.
+   *  http://documentcloud.github.com/underscore
+   */
+
+  var
+    nativeForEach      = Array.prototype.forEach,
+    nativeKeys         = Object.keys;
+
+  var _each = function(obj, iterator, context) {
+    if (obj === null) return;
+    if (nativeForEach && obj.forEach === nativeForEach) {
+      obj.forEach(iterator, context);
+    } else if (obj.length === +obj.length) {
+      for (var i = 0, l = obj.length; i < l; i++) {
+        if (i in obj && iterator.call(context, obj[i], i, obj) === breaker) return;
+      }
+    } else {
+      for (var key in obj) {
+        if (_.has(obj, key)) {
+          if (iterator.call(context, obj[key], key, obj) === breaker) return;
+        }
+      }
+    }
+  };
+
+
+  var _keys = nativeKeys || function(obj) {
+    if (obj !== Object(obj)) throw new TypeError('Invalid object');
+    var keys = [];
+    for (var key in obj) if (_.has(obj, key)) keys[keys.length] = key;
+    return keys;
+  };
+
+
   var MarkyElement = function(node) {
     var node = node
     return {
       set: function(attrs) {
-        Object.keys(attrs).forEach(function(attr) {
+        _each(_keys(attrs), function(attr) {
           node.setAttribute(attr, attrs[attr])
         })
         return node
@@ -75,7 +113,7 @@
           }
 
           if (attrs) {
-            Object.keys(attrs).forEach(function(attr) {
+            _each(_keys(attrs), function(attr) {
               var value =  attrs[attr]
               if (typeof(value) == 'function') {
                 value = value()
@@ -118,12 +156,12 @@
           script set stop style svg switch symbol text textPath title tref tspan use view vkern"
       }
 
-      tags[type].split(" ").forEach(function(tag) {
+      _each(tags[type].split(" "), function(tag) {
         methods[tag] = builder(tag)
       })
 
       methods.appendTo = function(container) {
-        Array.prototype.slice.call(parent.childNodes).forEach(function(el) {
+        _each(Array.prototype.slice.call(parent.childNodes), function(el) {
           container.appendChild(el)
         })
       }
@@ -137,4 +175,4 @@
 
   window.Marky = Marky
 
-})()
+})();
