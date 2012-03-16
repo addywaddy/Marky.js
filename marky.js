@@ -12,6 +12,10 @@
     nativeForEach      = Array.prototype.forEach,
     nativeKeys         = Object.keys;
 
+  var _has = function(obj, key) {
+    return Object.prototype.hasOwnProperty.call(obj, key);
+  };
+
   var _each = function(obj, iterator, context) {
     if (obj === null) return;
     if (nativeForEach && obj.forEach === nativeForEach) {
@@ -22,7 +26,7 @@
       }
     } else {
       for (var key in obj) {
-        if (_.has(obj, key)) {
+        if (_has(obj, key)) {
           if (iterator.call(context, obj[key], key, obj) === breaker) return;
         }
       }
@@ -33,7 +37,7 @@
   var _keys = nativeKeys || function(obj) {
     if (obj !== Object(obj)) throw new TypeError('Invalid object');
     var keys = [];
-    for (var key in obj) if (_.has(obj, key)) keys[keys.length] = key;
+    for (var key in obj) if (_has(obj, key)) keys[keys.length] = key;
     return keys;
   };
 
