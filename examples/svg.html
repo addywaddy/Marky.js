@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Marky.js - SVG Example</title>
+    <script src="../marky.js" type="text/javascript" charset="utf-8"></script>
+    <style type="text/css" media="screen">
+      * {margin: 0; padding: 0}
+      html {background: #000}
+    </style>
+  </head>
+  <body>
+    <div id="svg"></div>
+    <script type="text/javascript" charset="utf-8">
+
+      var SVG = new Marky(document.getElementById("svg"), 'svg')
+
+      with (SVG) {
+
+        svg({width:'100%', height:'360px'}, function(){
+          for (var i = 0; i <= 200 ; i++){
+            var fillColor = 'rgba(' + (3 * i) +',' + (200 - (3 * i)) + ',' + (200 - (2 * i)) + ',1)'
+            rect({x: (0 + i*10), y: 100, height: "2000px", width: 1, fill: fillColor})
+          }
+
+          text("Marky.js", {x: 100, y: 300, fill: 'rgba(0, 0, 0, 1)', 'font-size': "240px", 'font-family': 'Georgia', 'font-style': 'italic', stroke: 'rgba(0,0,0,0.4)', 'stroke-width': 20})
+        })
+
+      }
+    </script>
+  </body>
+</html>

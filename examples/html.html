@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Marky.js - HTML Example</title>
+    <script src="../marky.js" type="text/javascript" charset="utf-8"></script>
+    <style type="text/css" media="screen">
+      * {font-family: Arial}
+      label {display: block}
+    </style>
+  </head>
+  <body>
+    <h1>I'm in the DOM</h1>
+    <script type="text/javascript" charset="utf-8">
+
+      var HTML = new Marky(document.body)
+      var LazyContent = new Marky(function() { return document.getElementById('lazy-loaded')});
+
+      with (HTML) {
+
+        h1("We've been added with Markyjs")
+
+        h2("Table")
+
+        table(function() {
+          thead(function() {
+            th("Name")
+            th("Age")
+          })
+
+          tbody(function() {
+
+            var counter = 0
+
+            function bgColor () {
+              counter ++
+              return (counter%2 == 0) ? '#eee' : '#aaa'
+            }
+
+            [['John', 37], ['Paul', 39], ['Goerge', 45], ['Ringo', 34]].forEach(function(pair) {
+
+              tr({style: "background: " + bgColor() }, function() {
+                td(pair[0])
+                td(pair[1])
+              })
+
+            })
+
+          })
+        })
+
+        h2("Form")
+
+        form({action: '/index.html', method: 'get'}, function() {
+          label("Name:", function() {
+            input({placeholder: 'type'})
+          })
+
+          label("Age:", function() {
+            select(function() {
+
+              [37, 39, 45, 34].forEach(function(age) {
+                var attrs = {value: age}
+                if (age == 45) {
+                  attrs.selected = 'selected'
+                }
+                option(age, attrs)
+              })
+
+            })
+          })
+
+          p(function() {
+            button("Submit", {type: 'submit'})
+            a("Cancel", {href: 'http://www.google.com'})
+          })
+        })
+
+        h2("Lazy loading")
+        div({id: 'lazy-loaded'}, function () {
+          p("This has been added to a Marky object attached to an exising DOM node.")
+        })
+      }
+      
+      with(LazyContent) {
+        p("This pararaph has been added in a lazily, by Marky attaching to a function.", {style: "background: orange"});
+      }
+
+    </script>
+  </body>
+</html>

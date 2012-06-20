@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Marky.js - HTML Example</title>
+    <script src="../marky.js" type="text/javascript" charset="utf-8"></script>
+    <style type="text/css" media="screen">
+      * {font-family: Arial}
+      label {display: block}
+    </style>
+    <script type="text/javascript" charset="utf-8">
+      var snippet = new Marky()
+
+      with (snippet) {
+        span(" ... like so.")
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Snippets</h1>
+    <p id="container">
+      Marky can also be used to generate a node heirarchy to be
+      inserted at a later point in the DOM
+    </p>
+    <script type="text/javascript" charset="utf-8">
+      snippet.appendTo(document.getElementById('container'))
+    </script>
+  </body>
+</html>
