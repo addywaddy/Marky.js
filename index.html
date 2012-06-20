@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Marky.js by addywaddy</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Marky.js</h1>
+        <p>A simple library for generating HTML/SVG with javascript.</p>
+        <p class="view"><a href="https://github.com/addywaddy/Marky.js">View the Project on GitHub <small>addywaddy/Marky.js</small></a></p>
+        <ul>
+          <li><a href="https://github.com/addywaddy/Marky.js/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/addywaddy/Marky.js/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/addywaddy/Marky.js">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h2>The Basics</h2>
+
+<pre><code>var H = new Marky(document.body)
+
+with(H) {
+  h2("Form")
+
+  form({action: '/index.html', method: 'get'}, function() {
+    label("Name:", function() {
+      input({placeholder: 'type'})
+    })
+    label("Age:", function() {
+      select(function() {
+        [37, 39, 45, 34].forEach(function(age) {
+          var attrs = {value: age}
+          if (age == 45) {
+        attrs.selected = 'selected'
+      }
+      option(age, attrs)
+        })
+      })
+    })
+    p(function() {
+      button("Submit", {type: 'submit'})
+      a("Cancel", {href: 'http://www.google.com'})
+    })
+  })
+}
+
+// Or ...
+
+H.h2(function(){
+  H.a("Github", {href: 'http://www.github.com'})
+})
+</code></pre>
+
+<h2>Some Examples</h2>
+
+<ul>
+<li><a href="/Marky.js/examples/html.html">html</a></li>
+<li><a href="/Marky.js/examples/svg.html">svg</a></li>
+<li><a href="/Marky.js/examples/template.html">template</a></li>
+</ul><p>Feedback welcome!</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/addywaddy">addywaddy</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
